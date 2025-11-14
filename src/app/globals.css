@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Trang chỉ hỗ trợ light */
+:root {
+  color-scheme: light;
+}
+
+/* Tránh UA tự tối nền khi tiết kiệm pin */
+html,
+body,
+#__next,
+main {
+  background-color: #f9fafb !important; /* bg-gray-50 */
+}
+
+/* Màu chữ mặc định (đừng dùng biến đổi theo dark) */
+body {
+  color: #111827; /* text-gray-900 */
+}
+
+/* Nếu bạn muốn chắc chắn x2 khi hệ thống báo dark, vẫn giữ light */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
+  html,
+  body,
+  #__next,
+  main {
+    background-color: #f9fafb !important;
+  }
+  body {
+    color: #111827 !important;
+  }
+}
+
+/* High Contrast: giữ palette ổn định */
+@media (forced-colors: active) {
+  html,
+  body {
+    forced-color-adjust: none;
+    background-color: #f9fafb;
+  }
+}
+
+/* Tiện ích nhỏ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
