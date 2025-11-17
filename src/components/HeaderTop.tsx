@@ -3,15 +3,19 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { Home, Info, FolderKanban, Mail } from 'lucide-react'
+import { Home, Info, FolderKanban, ShoppingCart } from 'lucide-react'
 
 type Item = { label: string; href: string; icon: React.ReactNode }
 
 const NAV_ITEMS: Item[] = [
-  { label: 'Home', href: '/', icon: <Home className="w-4 h-4" /> },
-  { label: 'About', href: '/about', icon: <Info className="w-4 h-4" /> },
-  { label: 'Project', href: '/project', icon: <FolderKanban className="w-4 h-4" /> },
-  { label: 'Contact', href: '/contact', icon: <Mail className="w-4 h-4" /> },
+  { label: 'Trang Chủ', href: '/', icon: <Home className="w-4 h-4" /> },
+  { label: 'Về Cam Hữu Cơ', href: '/about', icon: <Info className="w-4 h-4" /> },
+  { label: 'Sản Phẩm', href: '/products', icon: <FolderKanban className="w-4 h-4" /> },
+  {
+    label: 'Liên Hệ Đặt Mua',
+    href: '/contact',
+    icon: <ShoppingCart className="w-4 h-4" />,
+  },
 ]
 
 const CONTAINER = 'max-w-6xl mx-auto px-4'
@@ -32,17 +36,13 @@ function NavItem({
   isMobile?: boolean
 }) {
   const base =
-    'flex items-center gap-2 px-3 py-2 text-[15px] sm:text-base font-medium transition-colors focus:outline-none focus-visible:ring-0'
+    'flex items-center gap-2 px-3 py-2 text-[15px] sm:text-base font-medium transition-colors focus:outline-none focus-visible:ring-0 border-b-2 border-transparent'
 
-  // Desktop: border-bottom (giữ nguyên)
-  const desktop =
-    'hidden sm:flex border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:border-emerald-300'
-  const desktopActive = 'border-emerald-500 text-gray-900'
+  const desktop = 'hidden sm:flex text-gray-600 hover:text-gray-900 hover:border-orange-300'
+  const desktopActive = 'border-orange-500 text-orange-600'
 
-  // Mobile: border-left + bg xanh nhạt, không rounded
-  const mobile =
-    'sm:hidden border-l-2 border-transparent text-gray-700 hover:bg-gray-50 active:bg-gray-100'
-  const mobileActive = 'border-emerald-500 bg-emerald-50 text-gray-900'
+  const mobile = 'sm:hidden text-gray-700 hover:bg-gray-50 active:bg-gray-100'
+  const mobileActive = 'border-orange-500 bg-orange-50 text-orange-600'
 
   return (
     <Link
@@ -54,12 +54,12 @@ function NavItem({
         isActive ? (isMobile ? mobileActive : desktopActive) : '',
       ].join(' ')}
     >
-      <span
-        className={isActive ? 'text-emerald-600' : 'text-gray-500 group-hover:text-emerald-600'}
-      >
+      <span className={isActive ? 'text-orange-600' : 'text-gray-500 group-hover:text-orange-600'}>
         {icon}
       </span>
-      {label}
+
+      {/* ⭐ ACTIVE TEXT = ORANGE */}
+      <span className={isActive ? 'text-orange-600' : ''}>{label}</span>
     </Link>
   )
 }
@@ -103,18 +103,18 @@ export default function HeaderTop() {
           </div>
         </nav>
 
-        {/* Right: avatar */}
+        {/* Avatar */}
         <div className="ml-auto flex items-center gap-2">
           <div className="relative">
-            <div className="w-8 h-8 grid place-items-center text-[10px] font-semibold text-white bg-gradient-to-br from-cyan-400 to-lime-500 rounded-full">
+            <div className="w-8 h-8 grid place-items-center text-[10px] font-semibold text-white bg-gradient-to-br from-orange-400 to-orange-600 rounded-full">
               KH
             </div>
-            <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 bg-emerald-500 ring-2 ring-white rounded-full"></span>
+            <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 bg-orange-500 ring-2 ring-white rounded-full"></span>
           </div>
         </div>
       </div>
 
-      {/* Mobile dropdown */}
+      {/* Mobile menu */}
       {open && (
         <div className="sm:hidden border-t bg-white/95 backdrop-blur">
           <div className={`${CONTAINER}`}>
