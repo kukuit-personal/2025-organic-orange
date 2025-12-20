@@ -5,6 +5,7 @@ import 'grapesjs/dist/css/grapes.min.css'
 import NavbarLeft from '@/components/NavbarLeft'
 import HeaderTop from '@/components/HeaderTop'
 import Providers from './providers'
+import ChatWidget from '@/components/ChatWidget'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             aria-hidden="true"
           />
         </div>
+        <ChatWidget />
       </body>
     </html>
   )
