@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { MessageCircle, X, SendHorizonal } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion' // ✅ thêm
+import { AnimatePresence, motion } from 'framer-motion'
 
 type ChatMessage = {
   role: 'user' | 'assistant'
@@ -20,7 +20,7 @@ export default function ChatWidget() {
     {
       role: 'assistant',
       content:
-        'Hello 👋 I am Ainka Bot. Are you looking for consultation about a website, landing page, or business automation?',
+        'Xin chào! Mình là Cam Hữu Cơ ChatBot. Bạn đang muốn tư vấn về cam hữu cơ, cam tươi hay các sản phẩm từ cam (nước cam, siro, cam mật ong, cam sấy...)?',
     },
   ])
   const [input, setInput] = useState('')
@@ -90,7 +90,7 @@ export default function ChatWidget() {
         ...prev,
         {
           role: 'assistant',
-          content: 'Connection error, please try sending again 🙏',
+          content: 'Kết nối có lỗi, bạn thử gửi lại giúp mình nhé.',
         },
       ])
     } finally {
@@ -107,7 +107,7 @@ export default function ChatWidget() {
     e.preventDefault()
     console.log('Lead info:', { name, phone, note })
 
-    alert('Thank you! The Ainka team will contact you as soon as possible ❤️')
+    alert('Cảm ơn bạn! Bên Cam Hữu Cơ sẽ liên hệ với bạn sớm nhất.')
 
     setName('')
     setPhone('')
@@ -120,7 +120,7 @@ export default function ChatWidget() {
       <button
         onClick={toggleOpen}
         className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl transition hover:scale-105 hover:bg-blue-500 focus:outline-none"
-        aria-label="Open support chat"
+        aria-label="Mở chat hỗ trợ"
       >
         <MessageCircle className="h-7 w-7" />
       </button>
@@ -129,7 +129,7 @@ export default function ChatWidget() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            key="ainka-chat"
+            key="camhuuco-chat"
             initial={{ opacity: 0, y: 40, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
@@ -141,22 +141,22 @@ export default function ChatWidget() {
               <div className="flex items-center gap-2">
                 <div className="h-10 w-10 overflow-hidden rounded-full bg-white/10">
                   <Image
-                    src="/images/ainka-bot.png"
-                    alt="Ainka Bot"
+                    src="/images/camhuuco-bot.png"
+                    alt="Cam Hữu Cơ ChatBot"
                     width={40}
                     height={40}
                     className="h-10 w-10 object-cover"
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold">Ainka Bot</span>
-                  <span className="text-[11px] text-blue-100">Online - ready to assist</span>
+                  <span className="text-sm font-semibold">Cam Hữu Cơ ChatBot</span>
+                  <span className="text-[11px] text-blue-100">Đang online - sẵn sàng hỗ trợ</span>
                 </div>
               </div>
               <button
                 onClick={toggleOpen}
                 className="rounded-full p-1 hover:bg-white/10"
-                aria-label="Close chat"
+                aria-label="Đóng chat"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -164,7 +164,7 @@ export default function ChatWidget() {
 
             {/* Chat content + form + input */}
             <div className="flex max-h-96 flex-col bg-slate-50">
-              <div className="ainka-chat-scroll flex-1 space-y-2 overflow-y-auto px-3 py-3 text-sm">
+              <div className="camhuuco-chat-scroll flex-1 space-y-2 overflow-y-auto px-3 py-3 text-sm">
                 {messages.map((msg, idx) => {
                   const isUser = msg.role === 'user'
                   return (
@@ -172,8 +172,8 @@ export default function ChatWidget() {
                       {!isUser && (
                         <div className="mr-2 mt-1 h-7 w-7 overflow-hidden rounded-full bg-blue-500/10">
                           <Image
-                            src="/images/ainka-bot.png"
-                            alt="Ainka Bot"
+                            src="/images/camhuuco-bot.png"
+                            alt="Cam Hữu Cơ ChatBot"
                             width={28}
                             height={28}
                             className="h-7 w-7 object-cover"
@@ -196,7 +196,7 @@ export default function ChatWidget() {
                 {isSending && (
                   <div className="flex items-center gap-2 text-xs text-slate-400">
                     <span className="h-2 w-2 animate-ping rounded-full bg-blue-500" />
-                    Ainka Bot is typing...
+                    Cam Hữu Cơ ChatBot đang trả lời...
                   </div>
                 )}
 
@@ -206,27 +206,27 @@ export default function ChatWidget() {
                     className="mt-1 space-y-2 rounded-xl border border-slate-200 bg-white/95 px-3 py-3 text-xs shadow-sm"
                   >
                     <p className="text-[11px] text-slate-600">
-                      To help the Ainka team support you better, could you please share your{' '}
-                      <b>name</b> and <b>phone number</b>? 📞
+                      Để bên Cam Hữu Cơ hỗ trợ bạn tốt hơn, bạn cho mình xin <b>tên</b> và{' '}
+                      <b>số điện thoại</b> nhé.
                       <br />
-                      If it is not convenient now, you can still continue chatting below.
+                      Nếu chưa tiện, bạn vẫn có thể tiếp tục chat bên dưới.
                     </p>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-medium text-slate-700">Your name</label>
+                      <label className="font-medium text-slate-700">Tên của bạn</label>
                       <input
                         className="h-8 w-full rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
-                        placeholder="E.g. John"
+                        placeholder="Ví dụ: Khang"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-medium text-slate-700">Phone number</label>
+                      <label className="font-medium text-slate-700">Số điện thoại</label>
                       <input
                         className="h-8 w-full rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
-                        placeholder="E.g. 09xx xxx xxx"
+                        placeholder="Ví dụ: 09xx xxx xxx"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                       />
@@ -234,11 +234,11 @@ export default function ChatWidget() {
 
                     <div className="flex flex-col gap-1">
                       <label className="font-medium text-slate-700">
-                        What would you like to consult about? (optional)
+                        Bạn muốn tư vấn gì thêm? (không bắt buộc)
                       </label>
                       <textarea
                         className="min-h-[50px] w-full rounded-lg border border-slate-300 bg-white px-2 py-1 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
-                        placeholder="E.g. I want to build a website + landing page for ads"
+                        placeholder="Ví dụ: Mình muốn đặt cam tươi 5kg, giao nội thành..."
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
                       />
@@ -248,12 +248,12 @@ export default function ChatWidget() {
                       type="submit"
                       className="mt-1 inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-blue-500 active:scale-[0.98]"
                     >
-                      Send information to Ainka
+                      Gửi thông tin cho Cam Hữu Cơ
                     </button>
 
                     <p className="text-[10px] text-slate-400">
-                      By submitting, you agree that Ainka may contact you via the phone number you
-                      provide.
+                      Khi gửi thông tin, bạn đồng ý để Cam Hữu Cơ liên hệ qua số điện thoại bạn cung
+                      cấp.
                     </p>
                   </form>
                 )}
@@ -267,7 +267,7 @@ export default function ChatWidget() {
               >
                 <input
                   className="h-9 flex-1 rounded-full border border-slate-300 bg-white px-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
-                  placeholder="Type your question..."
+                  placeholder="Nhập câu hỏi của bạn..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                 />
@@ -275,7 +275,7 @@ export default function ChatWidget() {
                   type="submit"
                   disabled={isSending || !input.trim()}
                   className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white shadow-sm transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-300"
-                  aria-label="Send message"
+                  aria-label="Gửi tin nhắn"
                 >
                   <SendHorizonal className="h-4 w-4" />
                 </button>
