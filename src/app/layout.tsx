@@ -10,10 +10,46 @@ import ChatWidget from '@/components/ChatWidget'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Cam Sành Hữu Cơ - Organic Orange',
-  description: 'Organic Orange website',
+  title: 'Cam Hữu Cơ | Mang vitamin C đến với mọi nhà',
+  description:
+    'Cam sành hữu cơ sạch từ vườn Vĩnh Long: không thuốc trừ sâu hóa học, thu hoạch đúng vụ, giàu vitamin C. Đặt mua cam hữu cơ, nước ép, mứt, siro – giao nhanh trong ngày.',
+  keywords: [
+    'cam hữu cơ',
+    'cam sành hữu cơ',
+    'cam huu co',
+    'cam sanh huu co',
+    'vitamin c',
+    'cam sạch',
+    'nước ép cam hữu cơ',
+    'sản phẩm từ cam',
+    'cam Vĩnh Long',
+  ],
   icons: {
     icon: '/favicon.ico',
+  },
+  alternates: {
+    canonical: 'https://camhuuco.vn',
+  },
+  openGraph: {
+    title: 'Cam Hữu Cơ | Cam sành hữu cơ sạch - giàu Vitamin C',
+    description:
+      'Cam sành hữu cơ sạch từ vườn: không hóa chất, thu hoạch đúng vụ, giàu vitamin C. Giao nhanh trong ngày.',
+    url: 'https://camhuuco.vn',
+    siteName: 'Cam Hữu Cơ',
+    locale: 'vi_VN',
+    type: 'website',
+    images: [
+      {
+        url: 'https://camhuuco.vn/images/banner-orange-1.png',
+        width: 1200,
+        height: 630,
+        alt: 'Cam sành hữu cơ - Cam Hữu Cơ',
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
