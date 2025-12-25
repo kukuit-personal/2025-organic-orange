@@ -272,7 +272,7 @@ export default function ContactPage() {
 
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/product"
+                  href="/products"
                   className="inline-flex items-center gap-2 text-sm font-medium text-orange-700 hover:underline"
                 >
                   <ShoppingCart className="w-4 h-4" />

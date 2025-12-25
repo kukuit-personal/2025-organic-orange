@@ -107,7 +107,7 @@ export default function HeaderTop() {
         <div className="ml-auto flex items-center gap-2">
           <div className="relative">
             <div className="w-8 h-8 grid place-items-center text-[10px] font-semibold text-white bg-gradient-to-br from-orange-400 to-orange-600 rounded-full">
-              KH
+              KD
             </div>
             <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 bg-orange-500 ring-2 ring-white rounded-full"></span>
           </div>
