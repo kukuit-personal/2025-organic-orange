@@ -79,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* FOOTER thông tin vườn */}
             <footer className="bg-orange-50/20 border-t border-orange-100">
               <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 text-center text-sm text-slate-600">
-                <p className="font-semibold text-slate-700">Vườn cam sành hữu cơ</p>
+                <p className="font-semibold text-slate-700">Vườn Cam Sành Hữu Cơ</p>
                 <p className="mt-1">Xã Hòa Bình - Huyện Trà Ôn - Tỉnh Vĩnh Long</p>
                 <p className="mt-1">Store ở TP. Hồ Chí Minh</p>
               </div>

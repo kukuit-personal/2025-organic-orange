@@ -75,7 +75,7 @@ export default function AboutOrganicOrangePage() {
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/product"
+                  href="/products"
                   className="inline-flex items-center gap-2 rounded-xl bg-orange-500 text-white px-4 py-2 text-sm font-medium hover:bg-orange-600 transition"
                 >
                   Xem sản phẩm từ vườn cam
@@ -531,7 +531,7 @@ export default function AboutOrganicOrangePage() {
             className="mt-6 flex flex-wrap justify-center gap-3"
           >
             <Link
-              href="/product"
+              href="/products"
               className="inline-flex items-center gap-2 rounded-xl bg-orange-500 text-white px-5 py-2.5 text-sm font-medium hover:bg-orange-600 transition"
             >
               Xem danh sách sản phẩm
