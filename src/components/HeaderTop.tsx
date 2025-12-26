@@ -1,18 +1,19 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { Home, Info, FolderKanban, ShoppingCart } from 'lucide-react'
+import { Info, FolderKanban, ShoppingCart, BookOpen } from 'lucide-react'
 
 type Item = { label: string; href: string; icon: React.ReactNode }
 
 const NAV_ITEMS: Item[] = [
-  { label: 'Trang Chủ', href: '/', icon: <Home className="w-4 h-4" /> },
   { label: 'Về Cam Hữu Cơ', href: '/about', icon: <Info className="w-4 h-4" /> },
   { label: 'Sản Phẩm', href: '/products', icon: <FolderKanban className="w-4 h-4" /> },
+  { label: 'Blog', href: '/blogs', icon: <BookOpen className="w-4 h-4" /> },
   {
-    label: 'Liên Hệ Đặt Mua',
+    label: 'Liên Hệ',
     href: '/contact',
     icon: <ShoppingCart className="w-4 h-4" />,
   },
@@ -36,7 +37,7 @@ function NavItem({
   isMobile?: boolean
 }) {
   const base =
-    'flex items-center gap-2 px-3 py-2 text-[15px] sm:text-base font-medium transition-colors focus:outline-none focus-visible:ring-0 border-b-2 border-transparent'
+    'flex items-center gap-2 px-2 py-2 text-[15px] sm:text-base font-medium transition-colors focus:outline-none focus-visible:ring-0 border-b-2 border-transparent'
 
   const desktop = 'hidden sm:flex text-gray-600 hover:text-gray-900 hover:border-orange-300'
   const desktopActive = 'border-orange-500 text-orange-600'
@@ -57,8 +58,6 @@ function NavItem({
       <span className={isActive ? 'text-orange-600' : 'text-gray-500 group-hover:text-orange-600'}>
         {icon}
       </span>
-
-      {/* ⭐ ACTIVE TEXT = ORANGE */}
       <span className={isActive ? 'text-orange-600' : ''}>{label}</span>
     </Link>
   )
@@ -76,12 +75,31 @@ export default function HeaderTop() {
   return (
     <header className="sticky top-0 z-30 bg-white/80 backdrop-blur border-b">
       <div className={`${CONTAINER} h-14 flex items-center gap-2`}>
+        {/* Logo (replaces Trang Chủ) */}
+        <Link
+          href="/"
+          aria-label="Go to home"
+          className="inline-flex items-center rounded-md hover:bg-gray-50"
+          onClick={() => setOpen(false)}
+        >
+          <Image
+            src="/icon-192.png"
+            alt="Cam Hữu Cơ"
+            width={56}
+            height={56}
+            className="rounded-full"
+            priority
+          />
+          {/* <span className="hidden sm:inline text-[15px] font-semibold text-gray-900">
+              Cam Hữu Cơ
+            </span> */}
+        </Link>
         {/* Hamburger (mobile) */}
         <button
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="sm:hidden inline-grid place-items-center w-10 h-10 hover:bg-gray-100"
+          className="sm:hidden ml-auto inline-grid place-items-center w-10 h-10 hover:bg-gray-100"
         >
           <svg viewBox="0 0 24 24" className="w-5 h-5 text-gray-700">
             <path fill="currentColor" d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z" />
@@ -90,7 +108,7 @@ export default function HeaderTop() {
 
         {/* Nav (desktop) */}
         <nav className="ml-2 hidden sm:flex items-stretch justify-start">
-          <div className="flex h-14 items-end gap-3">
+          <div className="flex items-end gap-3">
             {NAV_ITEMS.map((it) => (
               <NavItem
                 key={it.href}
@@ -102,16 +120,6 @@ export default function HeaderTop() {
             ))}
           </div>
         </nav>
-
-        {/* Avatar */}
-        <div className="ml-auto flex items-center gap-2">
-          <div className="relative">
-            <div className="w-8 h-8 grid place-items-center text-[10px] font-semibold text-white bg-gradient-to-br from-orange-400 to-orange-600 rounded-full">
-              KD
-            </div>
-            <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 bg-orange-500 ring-2 ring-white rounded-full"></span>
-          </div>
-        </div>
       </div>
 
       {/* Mobile menu */}
