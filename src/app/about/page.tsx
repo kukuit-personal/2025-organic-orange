@@ -47,7 +47,7 @@ export default function AboutOrganicOrangePage() {
               transition={{ duration: 0.6 }}
             >
               <p className="text-xs md:text-sm tracking-wide uppercase text-orange-600 font-semibold">
-                Cam sành hữu cơ - Hành trình từ vườn đến bàn
+                Cam sành hữu cơ - Hành trình từ vườn đến bạn
               </p>
               <h1 className="mt-3 text-3xl md:text-4xl font-bold leading-tight text-slate-900">
                 Câu chuyện vườn cam sành hữu cơ Organic Orange
@@ -99,7 +99,7 @@ export default function AboutOrganicOrangePage() {
             >
               <div className="relative w-full max-w-md mx-auto aspect-[4/3] rounded-3xl overflow-hidden shadow-md ring-4 ring-orange-100/70 bg-white">
                 <Image
-                  src="/images/about/hero-vuon-cam.jpg"
+                  src="/images/about/about-banner.jpg"
                   alt="Vườn cam sành hữu cơ"
                   fill
                   className="object-cover"
@@ -486,11 +486,11 @@ export default function AboutOrganicOrangePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="relative rounded-3xl overflow-hidden border border-orange-100 bg-white aspect-[3/4]"
+              className="relative rounded-3xl overflow-hidden border border-orange-100 bg-white"
             >
               <Image
                 src="/images/about/certificate-sample.jpg"
-                alt="Giấy chứng nhận cam sạch (minh họa)"
+                alt="Giấy chứng nhận cam sạch (đang cập nhật)"
                 fill
                 className="object-contain p-4"
                 sizes="(max-width: 768px) 100vw, 360px"

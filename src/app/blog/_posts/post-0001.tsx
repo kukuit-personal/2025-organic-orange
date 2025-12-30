@@ -35,7 +35,7 @@ export default function Post0001() {
       <div className="not-prose mt-6 grid gap-4 sm:grid-cols-2">
         <figure className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
           <Image
-            src="/images/blog/post-0001/vitamin-c.png"
+            src="/images/blogs/post-0001/vitamin-c.jpg"
             alt="Vitamin C trong cam sành giúp miễn dịch, tạo collagen và hỗ trợ hấp thu sắt"
             fill
             className="object-cover"
@@ -86,7 +86,7 @@ export default function Post0001() {
 
       <div className="not-prose mt-6 relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-gray-100">
         <Image
-          src="/images/blog/post-0001/cach-an.png"
+          src="/images/blogs/post-0001/cach-an.jpg"
           alt="Cách ăn cam sành đúng: ăn sau bữa, tránh lúc đói nếu dạ dày nhạy cảm"
           fill
           className="object-cover"

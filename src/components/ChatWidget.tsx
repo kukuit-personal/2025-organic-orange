@@ -12,6 +12,15 @@ type ChatMessage = {
 
 const ASK_TAG = '[ASK_CONTACT_INFO]'
 
+// ===== Pro rules =====
+const AUTO_OPEN_AFTER_MS = 15000 // 15s
+const REQUIRED_SCROLL_RATIO = 0.25 // 25%
+const AUTO_HIDE_AFTER_MS = 7000 // mở xong 7s tự ẩn (nếu user không tương tác)
+
+// ===== Session keys (1 lần / session) =====
+const SESSION_AUTOSHOW_KEY = 'camhuuco_chat_autoshow_done'
+const SESSION_INTERACTED_KEY = 'camhuuco_chat_interacted_session'
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
@@ -33,14 +42,148 @@ export default function ChatWidget() {
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
+  // ===== refs to avoid stale state inside timers =====
+  const hasInteractedRef = useRef(false)
+  const inputRef = useRef('')
+  const isSendingRef = useRef(false)
+  const autoOpenedRef = useRef(false)
+
   useEffect(() => {
-    if (hasInteracted) return
-    const timer = setTimeout(() => {
-      setIsOpen(true)
-    }, 5000)
-    return () => clearTimeout(timer)
+    hasInteractedRef.current = hasInteracted
   }, [hasInteracted])
 
+  useEffect(() => {
+    inputRef.current = input
+  }, [input])
+
+  useEffect(() => {
+    isSendingRef.current = isSending
+  }, [isSending])
+
+  // ===== timers =====
+  const timeTimerRef = useRef<number | null>(null)
+  const hideTimerRef = useRef<number | null>(null)
+
+  const clearTimers = () => {
+    if (timeTimerRef.current) window.clearTimeout(timeTimerRef.current)
+    if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current)
+    timeTimerRef.current = null
+    hideTimerRef.current = null
+  }
+
+  const markInteracted = () => {
+    if (!hasInteractedRef.current) {
+      hasInteractedRef.current = true
+      setHasInteracted(true)
+    }
+    autoOpenedRef.current = false
+    clearTimers()
+
+    try {
+      sessionStorage.setItem(SESSION_INTERACTED_KEY, '1')
+    } catch {}
+  }
+
+  // Load interacted flag (session)
+  useEffect(() => {
+    try {
+      const interactedSession = sessionStorage.getItem(SESSION_INTERACTED_KEY) === '1'
+      if (interactedSession) {
+        setHasInteracted(true)
+        hasInteractedRef.current = true
+      }
+    } catch {}
+  }, [])
+
+  // Auto-open condition: 15s + scroll 25% + only once/session
+  useEffect(() => {
+    if (hasInteractedRef.current) return
+
+    // only once per session
+    try {
+      const done = sessionStorage.getItem(SESSION_AUTOSHOW_KEY) === '1'
+      if (done) return
+    } catch {}
+
+    let timeReady = false
+    let scrollReady = false
+    let didTrigger = false
+
+    const tryTrigger = () => {
+      if (didTrigger) return
+      if (hasInteractedRef.current) return
+      if (!timeReady || !scrollReady) return
+
+      didTrigger = true
+
+      // mark session done
+      try {
+        sessionStorage.setItem(SESSION_AUTOSHOW_KEY, '1')
+      } catch {}
+
+      // open + auto-hide
+      setIsOpen(true)
+      autoOpenedRef.current = true
+
+      hideTimerRef.current = window.setTimeout(() => {
+        // chỉ auto-hide nếu vẫn đang là auto-open, và user chưa tương tác
+        if (!autoOpenedRef.current) return
+        if (hasInteractedRef.current) return
+        if (isSendingRef.current) return
+        if (inputRef.current.trim().length > 0) return
+
+        setIsOpen(false)
+        autoOpenedRef.current = false
+      }, AUTO_HIDE_AFTER_MS)
+    }
+
+    // 1) Time ready after 15s
+    timeTimerRef.current = window.setTimeout(() => {
+      timeReady = true
+      tryTrigger()
+    }, AUTO_OPEN_AFTER_MS)
+
+    // 2) Scroll ready at 25%
+    const doc = document.documentElement
+    const checkScroll = () => {
+      const maxScroll = doc.scrollHeight - window.innerHeight
+
+      // page không scroll được => coi như đạt scroll condition
+      if (maxScroll <= 0) {
+        scrollReady = true
+        tryTrigger()
+        return
+      }
+
+      const y = window.scrollY || window.pageYOffset || 0
+      const ratio = maxScroll > 0 ? y / maxScroll : 1
+      if (ratio >= REQUIRED_SCROLL_RATIO) {
+        scrollReady = true
+        tryTrigger()
+      }
+    }
+
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        checkScroll()
+        ticking = false
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    checkScroll()
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      clearTimers()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // run once
+
+  // Scroll to bottom
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -48,12 +191,15 @@ export default function ChatWidget() {
   }, [messages, showLeadForm])
 
   const toggleOpen = () => {
+    // user bấm => coi là interacted (từ đó không auto-open/auto-hide nữa)
+    markInteracted()
     setIsOpen((prev) => !prev)
-    setHasInteracted(true)
   }
 
   const handleSend = async () => {
     if (!input.trim() || isSending) return
+
+    markInteracted()
 
     const userMsg: ChatMessage = { role: 'user', content: input.trim() }
     const newMessages = [...messages, userMsg]
@@ -80,18 +226,13 @@ export default function ChatWidget() {
 
         setMessages((prev) => [...prev, { role: 'assistant', content: cleanedReply }])
 
-        if (shouldAskContact) {
-          setShowLeadForm(true)
-        }
+        if (shouldAskContact) setShowLeadForm(true)
       }
     } catch (error) {
       console.error(error)
       setMessages((prev) => [
         ...prev,
-        {
-          role: 'assistant',
-          content: 'Kết nối có lỗi, bạn thử gửi lại giúp mình nhé.',
-        },
+        { role: 'assistant', content: 'Kết nối có lỗi, bạn thử gửi lại giúp mình nhé.' },
       ])
     } finally {
       setIsSending(false)
@@ -112,6 +253,7 @@ export default function ChatWidget() {
     setName('')
     setPhone('')
     setNote('')
+    markInteracted()
   }
 
   return (
@@ -196,7 +338,7 @@ export default function ChatWidget() {
                 {isSending && (
                   <div className="flex items-center gap-2 text-xs text-slate-400">
                     <span className="h-2 w-2 animate-ping rounded-full bg-blue-500" />
-                    Cam Hữu Cơ ChatBot đang trả lời...
+                    Cam Hữu Cơ ChatBot đang trả lời.
                   </div>
                 )}
 
@@ -218,7 +360,10 @@ export default function ChatWidget() {
                         className="h-8 w-full rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
                         placeholder="Ví dụ: Khang"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => {
+                          markInteracted()
+                          setName(e.target.value)
+                        }}
                       />
                     </div>
 
@@ -228,7 +373,10 @@ export default function ChatWidget() {
                         className="h-8 w-full rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
                         placeholder="Ví dụ: 09xx xxx xxx"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={(e) => {
+                          markInteracted()
+                          setPhone(e.target.value)
+                        }}
                       />
                     </div>
 
@@ -238,9 +386,12 @@ export default function ChatWidget() {
                       </label>
                       <textarea
                         className="min-h-[50px] w-full rounded-lg border border-slate-300 bg-white px-2 py-1 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
-                        placeholder="Ví dụ: Mình muốn đặt cam tươi 5kg, giao nội thành..."
+                        placeholder="Ví dụ: Mình muốn đặt cam tươi 5kg, giao nội thành."
                         value={note}
-                        onChange={(e) => setNote(e.target.value)}
+                        onChange={(e) => {
+                          markInteracted()
+                          setNote(e.target.value)
+                        }}
                       />
                     </div>
 
@@ -267,9 +418,13 @@ export default function ChatWidget() {
               >
                 <input
                   className="h-9 flex-1 rounded-full border border-slate-300 bg-white px-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-300"
-                  placeholder="Nhập câu hỏi của bạn..."
+                  placeholder="Nhập câu hỏi của bạn."
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    // user bắt đầu gõ => coi là interacted để khỏi auto-hide
+                    markInteracted()
+                    setInput(e.target.value)
+                  }}
                 />
                 <button
                   type="submit"
