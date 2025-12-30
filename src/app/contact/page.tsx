@@ -79,7 +79,8 @@ export default function ContactPage() {
               </span>
               <div className="text-sm text-slate-700">
                 <p className="font-semibold">Gọi trực tiếp</p>
-                <p className="mt-1">SĐT: 09xx xxx xxx</p>
+                <p className="mt-1">SĐT: 0981 353 619 (Diễm)</p>
+                <p className="mt-1">SĐT: 0838 222 902 (Khang)</p>
                 <p className="mt-1 text-xs text-slate-500">
                   Thời gian: 7h30 – 21h00 (tất cả các ngày trong tuần)
                 </p>
@@ -95,7 +96,8 @@ export default function ContactPage() {
               </span>
               <div className="text-sm text-slate-700">
                 <p className="font-semibold">Zalo / Chat</p>
-                <p className="mt-1">Zalo: kết bạn số 09xx xxx xxx</p>
+                <p className="mt-1">Zalo: 0981 353 619 (Diễm)</p>
+                <p className="mt-1">Zalo: 0932 912 524 (Khang)</p>
                 <p className="mt-1 text-xs text-slate-500">
                   Nhắn tin để nhận bảng giá mới nhất & hình ảnh sản phẩm.
                 </p>
@@ -111,7 +113,7 @@ export default function ContactPage() {
               </span>
               <div className="text-sm text-slate-700">
                 <p className="font-semibold">Fanpage Facebook</p>
-                <p className="mt-1">Tên fanpage: Organic Orange (ví dụ)</p>
+                <p className="mt-1">fb.com/camhuuco</p>
                 <p className="mt-1 text-xs text-slate-500">
                   Bạn có thể inbox để đặt hàng hoặc xem thêm hình feedback.
                 </p>
@@ -129,9 +131,7 @@ export default function ContactPage() {
             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-sm">
               <MapPin className="w-4 h-4 text-orange-600" />
             </span>
-            <span>
-              Vườn cam: Xã Hòa Bình - Huyện Trà Ôn - Tỉnh Vĩnh Long · Store tại TP. Hồ Chí Minh
-            </span>
+            <span>Vườn cam: Xã Hòa Bình - Tỉnh Vĩnh Long · Store tại TP. Hồ Chí Minh</span>
           </motion.div>
         </div>
       </section>

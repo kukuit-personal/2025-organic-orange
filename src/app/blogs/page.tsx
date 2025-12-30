@@ -18,7 +18,7 @@ const POSTS: Post[] = [
       'Vitamin C hỗ trợ miễn dịch, hấp thu sắt và chống oxy hoá. Bài viết tổng hợp liều dùng phù hợp và lưu ý khi dùng cam hằng ngày.',
     date: '2025-12-26',
     tag: 'Dinh dưỡng',
-    thumbnail: '/images/blog/post-0001/thumbnail.jpg',
+    thumbnail: '/images/blogs/post-0001/thumbnail.jpg',
   },
   {
     title: 'Cam hữu cơ khác cam thường như thế nào?',
@@ -27,7 +27,7 @@ const POSTS: Post[] = [
       'Không chỉ là “không thuốc”. Hữu cơ còn là cách chăm đất, nước và hệ sinh thái để cây khoẻ tự nhiên, trái ngon theo mùa.',
     date: '2025-12-26',
     tag: 'Hữu cơ',
-    thumbnail: '/images/blog/post-0002/thumbnail.jpg',
+    thumbnail: '/images/blogs/post-0002/thumbnail.jpg',
   },
   {
     title: 'Ăn cam mỗi ngày có tốt không? Ai nên lưu ý?',
@@ -36,7 +36,7 @@ const POSTS: Post[] = [
       'Cam tốt nhưng không phải ai cũng dùng giống nhau. Người đau dạ dày, tiểu đường, trẻ nhỏ… nên chú ý cách ăn và thời điểm.',
     date: '2025-12-26',
     tag: 'Sức khoẻ',
-    thumbnail: '/images/blog/post-0003/thumbnail.jpg',
+    thumbnail: '/images/blogs/post-0003/thumbnail.jpg',
   },
 ]
 

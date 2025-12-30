@@ -50,11 +50,50 @@ export default function HomePage() {
   return (
     <main className="">
       {/* SECTION 1: HERO BANNER (bg cam nhạt) */}
+      {/* SECTION 1: HERO BANNER (bg cam nhạt) */}
       <section className="bg-orange-50/70">
         <div className={`${containerClass} pt-10 pb-12`}>
           <div className="grid grid-cols-1 md:grid-cols-[1.3fr,1fr] gap-8 items-center">
-            {/* Text side */}
+            {/* Banner image / carousel placeholder (mobile lên trước) */}
             <motion.div
+              className="relative order-1 md:order-2"
+              initial={{ opacity: 0, scale: 0.92, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: easeOutExpo, delay: 0.1 }}
+            >
+              <div
+                className="
+            relative w-full max-w-md mx-auto aspect-[3/2]
+            rounded-2xl overflow-hidden shadow-md
+            ring-4 ring-orange-100/70 bg-white
+          "
+              >
+                {/* Bạn có thể thay sau bằng carousel nếu muốn */}
+                <Image
+                  src="/images/home/banner-orange-1.jpg"
+                  alt="Giỏ cam sành hữu cơ"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 448px"
+                  priority
+                />
+              </div>
+
+              <div
+                className="
+            absolute -bottom-4 left-6 hidden md:inline-flex
+            items-center rounded-full bg-white/95 backdrop-blur
+            px-4 py-2 shadow-sm border border-orange-100
+            text-xs text-slate-700
+          "
+              >
+                Thu hoạch buổi sáng · Giao trong ngày (nội thành)
+              </div>
+            </motion.div>
+
+            {/* Text side (mobile xuống dưới) */}
+            <motion.div
+              className="order-2 md:order-1"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -62,9 +101,11 @@ export default function HomePage() {
               <p className="text-xs md:text-sm tracking-wide uppercase text-orange-600 font-semibold">
                 Cam sành hữu cơ - Sạch từ vườn đến bàn
               </p>
+
               <h1 className="mt-3 text-3xl md:text-4xl font-bold leading-tight text-slate-900">
                 Cam sành hữu cơ cho gia đình khỏe mạnh mỗi ngày
               </h1>
+
               <p className="mt-4 text-slate-600 max-w-prose">
                 Cam được trồng theo hướng hữu cơ, không thuốc trừ sâu hóa học, không phân bón vô cơ,
                 thu hoạch đúng vụ. Vị ngọt thanh, mọng nước, an tâm cho cả nhà từ người lớn đến trẻ
@@ -74,11 +115,16 @@ export default function HomePage() {
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 rounded-xl bg-orange-500 text-white px-4 py-2 text-sm font-medium hover:bg-orange-600 transition"
+                  className="
+              inline-flex items-center gap-2 rounded-xl
+              bg-orange-500 text-white px-4 py-2 text-sm font-medium
+              hover:bg-orange-600 transition
+            "
                 >
                   <ShoppingCart className="w-4 h-4" />
                   Đặt cam ngay hôm nay
                 </Link>
+
                 <Link
                   href="/about"
                   className="inline-flex items-center gap-2 text-sm font-medium text-orange-700 hover:underline"
@@ -95,35 +141,20 @@ export default function HomePage() {
                   </span>
                   Không thuốc trừ sâu hóa học
                 </div>
+
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-sm">
                     <Leaf className="w-3.5 h-3.5 text-orange-500" />
                   </span>
                   Thu hoạch trong ngày
                 </div>
-              </div>
-            </motion.div>
 
-            {/* Banner image / carousel placeholder */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: easeOutExpo, delay: 0.1 }}
-              className="relative"
-            >
-              <div className="relative w-full max-w-md mx-auto aspect-[4/3] rounded-3xl overflow-hidden shadow-md ring-4 ring-orange-100/70 bg-white">
-                {/* Bạn có thể thay sau bằng carousel nếu muốn */}
-                <Image
-                  src="/images/banner-orange-1.png"
-                  alt="Giỏ cam sành hữu cơ"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 420px"
-                  loading="lazy"
-                />
-              </div>
-              <div className="absolute -bottom-4 left-6 hidden md:block rounded-xl bg-white/80 backdrop-blur px-4 py-2 shadow-sm border border-orange-100 text-xs text-slate-700">
-                Thu hoạch buổi sáng · Giao trong ngày (nội thành)
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-sm">
+                    <Leaf className="w-3.5 h-3.5 text-orange-500" />
+                  </span>
+                  Vườn nhà chăm chuẩn
+                </div>
               </div>
             </motion.div>
           </div>
@@ -336,7 +367,8 @@ export default function HomePage() {
               </span>
               <div className="text-sm text-slate-700 text-left">
                 <p className="font-semibold">Gọi trực tiếp</p>
-                <p className="mt-1">SĐT: 09xx xxx xxx</p>
+                <p className="mt-1">SĐT: 0981 353 619</p>
+                <p className="mt-1">SĐT: 0838 222 902</p>
               </div>
             </motion.div>
 
@@ -349,7 +381,8 @@ export default function HomePage() {
               </span>
               <div className="text-sm text-slate-700 text-left">
                 <p className="font-semibold">Zalo / Chat</p>
-                <p className="mt-1">Zalo: kết bạn SĐT trên</p>
+                <p className="mt-1">Diễm: (0981 353 619)</p>
+                <p className="mt-1">Khang: (0932 912 524)</p>
               </div>
             </motion.div>
 
@@ -362,7 +395,7 @@ export default function HomePage() {
               </span>
               <div className="text-sm text-slate-700 text-left">
                 <p className="font-semibold">Fanpage Facebook</p>
-                <p className="mt-1">Link fanpage sẽ đặt tại đây</p>
+                <p className="mt-1">fb.com/camhuucovn</p>
               </div>
             </motion.div>
           </motion.div>

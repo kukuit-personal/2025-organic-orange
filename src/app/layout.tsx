@@ -78,10 +78,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* FOOTER thông tin vườn */}
             <footer className="bg-orange-50/20 border-t border-orange-100">
-              <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 text-center text-sm text-slate-600">
-                <p className="font-semibold text-slate-700">Vườn Cam Sành Hữu Cơ</p>
-                <p className="mt-1">Xã Hòa Bình - Huyện Trà Ôn - Tỉnh Vĩnh Long</p>
-                <p className="mt-1">Store ở TP. Hồ Chí Minh</p>
+              <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 text-sm text-slate-600">
+                <div className="flex flex-col md:flex-row md:justify-center md:items-start gap-10 md:gap-16">
+                  {/* Left */}
+                  <div className="text-center md:text-left">
+                    <p className="font-semibold text-slate-800">Vườn Cam Sành Hữu Cơ</p>
+                    <p className="mt-1">Xã Hòa Bình · Tỉnh Vĩnh Long</p>
+                    <p className="mt-1">Store tại TP. Hồ Chí Minh</p>
+                  </div>
+
+                  {/* Right */}
+                  <div className="text-center md:text-left">
+                    <p className="font-semibold text-slate-800">Hotline:</p>
+                    <p className="mt-1">0981 353 619 (Diễm)</p>
+                    <p className="mt-1">0838 222 902 (Khang)</p>
+                  </div>
+                </div>
               </div>
             </footer>
           </div>

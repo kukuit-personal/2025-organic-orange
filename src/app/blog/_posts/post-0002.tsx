@@ -15,7 +15,7 @@ export default function Post0002() {
       {/* Ảnh 1 */}
       <div className="mt-4 overflow-hidden rounded-xl border">
         <Image
-          src="/images/blog/post-0002/cham-dat.jpg"
+          src="/images/blogs/post-0002/cham-dat.jpg"
           alt="Chăm đất trong canh tác hữu cơ"
           width={1200}
           height={675}
@@ -51,7 +51,7 @@ export default function Post0002() {
       {/* Ảnh 2 */}
       <div className="mt-4 overflow-hidden rounded-xl border">
         <Image
-          src="/images/blog/post-0002/vuon-cam.jpg"
+          src="/images/blogs/post-0002/vuon-cam.jpg"
           alt="Vườn cam theo hướng hữu cơ"
           width={1200}
           height={675}
@@ -68,7 +68,7 @@ export default function Post0002() {
       {/* Ảnh 3 */}
       <div className="mt-4 overflow-hidden rounded-xl border">
         <Image
-          src="/images/blog/post-0002/can-canh-trai.jpg"
+          src="/images/blogs/post-0002/can-canh-trai.jpg"
           alt="Cận cảnh trái cam theo mùa"
           width={1200}
           height={675}
