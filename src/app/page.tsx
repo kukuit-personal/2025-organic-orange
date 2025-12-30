@@ -209,7 +209,7 @@ export default function HomePage() {
             >
               <div className="relative col-span-2 aspect-[16/9] rounded-2xl overflow-hidden bg-orange-50 border border-orange-100">
                 <Image
-                  src="/images/orange-garden-1.jpg"
+                  src="/images/home/orange-garden-1.jpg"
                   alt="Vườn cam sành hữu cơ"
                   fill
                   className="object-cover"
@@ -219,7 +219,7 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-square rounded-2xl overflow-hidden bg-orange-50 border border-orange-100">
                 <Image
-                  src="/images/orange-garden-2.jpg"
+                  src="/images/home/orange-garden-2.jpg"
                   alt="Cận cảnh trái cam sành hữu cơ"
                   fill
                   className="object-cover"
@@ -229,7 +229,7 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-square rounded-2xl overflow-hidden bg-orange-50 border border-orange-100">
                 <Image
-                  src="/images/orange-garden-3.jpg"
+                  src="/images/home/orange-garden-3.jpg"
                   alt="Thu hoạch cam sành"
                   fill
                   className="object-cover"
