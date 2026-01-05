@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import 'grapesjs/dist/css/grapes.min.css'
-import NavbarLeft from '@/components/NavbarLeft'
 import HeaderTop from '@/components/HeaderTop'
 import Providers from './providers'
 import ChatWidget from '@/components/ChatWidget'
@@ -27,11 +26,13 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
+      { url: '/icon-48.png', sizes: '48x48', type: 'image/png' },
       { url: '/favicon.ico' },
       { url: '/icon-16.png', sizes: '16x16', type: 'image/png' },
       { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
       { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
+    shortcut: ['/icon-48.png'],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   alternates: {
@@ -65,7 +66,7 @@ export const viewport: Viewport = {
 }
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light" />
         <meta name="supported-color-schemes" content="light" />
