@@ -1,44 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-
-type Post = {
-  title: string
-  slug: string
-  excerpt: string
-  date: string // YYYY-MM-DD
-  tag?: string
-  thumbnail: string
-}
-
-const POSTS: Post[] = [
-  {
-    title: 'Vitamin C trong cam sành: lợi ích & cách dùng đúng',
-    slug: 'vitamin-c-trong-cam-sanh-loi-ich-va-cach-dung-dung',
-    excerpt:
-      'Vitamin C hỗ trợ miễn dịch, hấp thu sắt và chống oxy hoá. Bài viết tổng hợp liều dùng phù hợp và lưu ý khi dùng cam hằng ngày.',
-    date: '2025-12-26',
-    tag: 'Dinh dưỡng',
-    thumbnail: '/images/blogs/post-0001/thumbnail.jpg',
-  },
-  {
-    title: 'Cam hữu cơ khác cam thường như thế nào?',
-    slug: 'cam-huu-co-khac-cam-thuong-nhu-the-nao',
-    excerpt:
-      'Không chỉ là “không thuốc”. Hữu cơ còn là cách chăm đất, nước và hệ sinh thái để cây khoẻ tự nhiên, trái ngon theo mùa.',
-    date: '2025-12-26',
-    tag: 'Hữu cơ',
-    thumbnail: '/images/blogs/post-0002/thumbnail.jpg',
-  },
-  {
-    title: 'Ăn cam mỗi ngày có tốt không? Ai nên lưu ý?',
-    slug: 'an-cam-moi-ngay-co-tot-khong-ai-nen-luu-y',
-    excerpt:
-      'Cam tốt nhưng không phải ai cũng dùng giống nhau. Người đau dạ dày, tiểu đường, trẻ nhỏ… nên chú ý cách ăn và thời điểm.',
-    date: '2025-12-26',
-    tag: 'Sức khoẻ',
-    thumbnail: '/images/blogs/post-0003/thumbnail.jpg',
-  },
-]
+import { POSTS } from './../blog/posts'
 
 export default function BlogPage() {
   return (
@@ -60,7 +22,6 @@ export default function BlogPage() {
             key={p.slug}
             className="rounded-2xl border bg-white overflow-hidden hover:shadow-sm transition-shadow"
           >
-            {/* Thumbnail (tỉ lệ ngang 4:3 ~ 400x300) */}
             <Link href={`/blog/${p.slug}`} className="block">
               <div className="relative w-full aspect-[4/3] bg-gray-100">
                 <Image
@@ -102,7 +63,6 @@ export default function BlogPage() {
         ))}
       </section>
 
-      {/* ✅ CTA moved to end of page */}
       <section className="mt-10 max-w-3xl">
         <div className="rounded-2xl bg-orange-50 border border-orange-100 p-5">
           <div className="font-semibold text-gray-900">
