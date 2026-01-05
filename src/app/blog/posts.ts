@@ -1,3 +1,5 @@
+// src/app/blog/posts.ts
+
 export type Post = {
   id: string // 'post-0001'
   title: string
@@ -8,6 +10,8 @@ export type Post = {
   thumbnail: string
   hero?: string
 }
+
+export const getPostById = (id: string) => POSTS.find((p) => p.id === id)
 
 export const POSTS: Post[] = [
   {
@@ -42,5 +46,16 @@ export const POSTS: Post[] = [
     tag: 'Sức khoẻ',
     thumbnail: '/images/blogs/post-0003/thumbnail.jpg',
     hero: '/images/blogs/post-0003/hero.jpg',
+  },
+  {
+    id: 'post-0004',
+    title: 'So sánh Vitamin C: cam sành và các thực phẩm “giàu C” như ổi, việt quất…',
+    slug: 'so-sanh-vitamin-c-cam-sanh-oi-viet-quat',
+    excerpt:
+      'Cam sành nổi bật vì dễ dùng mỗi ngày. Bài viết so sánh Vitamin C giữa cam sành và một số thực phẩm giàu C (ổi, việt quất…), kèm gợi ý ăn/uống hợp lý.',
+    date: '2026-01-05',
+    tag: 'Dinh dưỡng',
+    thumbnail: '/images/blogs/post-0004/thumbnail.jpg',
+    hero: '/images/blogs/post-0004/hero.jpg',
   },
 ]
