@@ -58,4 +58,15 @@ export const POSTS: Post[] = [
     thumbnail: '/images/blogs/post-0004/thumbnail.jpg',
     hero: '/images/blogs/post-0004/hero.jpg',
   },
+  {
+    id: 'post-0005',
+    title: 'Vitamin C là gì? Tác dụng chính và vì sao cơ thể không tự tạo được',
+    slug: 'vitamin-c-la-gi-tac-dung-chinh-va-vi-sao-co-the-khong-tu-tao-duoc',
+    excerpt:
+      'Vitamin C không chỉ “đỡ cảm”. Bài viết giải thích Vitamin C là gì, các tác dụng chính (collagen, chống oxy hoá, miễn dịch, hấp thu sắt) và vì sao cơ thể phải bổ sung từ thực phẩm.',
+    date: '2026-01-06',
+    tag: 'Dinh dưỡng',
+    thumbnail: '/images/blogs/post-0005/thumbnail.jpg',
+    hero: '/images/blogs/post-0005/hero.jpg',
+  },
 ]
