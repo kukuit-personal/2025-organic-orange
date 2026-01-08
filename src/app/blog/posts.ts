@@ -69,4 +69,15 @@ export const POSTS: Post[] = [
     thumbnail: '/images/blogs/post-0005/thumbnail.jpg',
     hero: '/images/blogs/post-0005/hero.jpg',
   },
+  {
+    id: 'post-0006',
+    title: 'Nhu cầu Vitamin C mỗi ngày bao nhiêu là đủ? (theo độ tuổi)',
+    slug: 'nhu-cau-vitamin-c-moi-ngay-bao-nhieu-la-du-theo-do-tuoi',
+    excerpt:
+      'Vitamin C tan trong nước nên cần bổ sung đều mỗi ngày. Bài viết tổng hợp nhu cầu Vitamin C khuyến nghị theo độ tuổi/giới tính (kể cả mang thai, cho con bú), lưu ý cho người hút thuốc và ngưỡng tối đa nên tránh.',
+    date: '2026-01-08',
+    tag: 'Dinh dưỡng',
+    thumbnail: '/images/blogs/post-0006/thumbnail.jpg',
+    hero: '/images/blogs/post-0006/hero.jpg',
+  },
 ]
