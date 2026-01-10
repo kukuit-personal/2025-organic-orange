@@ -83,7 +83,7 @@ export default function HeaderTop() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/icon-192.png"
+            src="/images/logo.png"
             alt="Cam Hữu Cơ"
             width={56}
             height={56}

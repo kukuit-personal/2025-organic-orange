@@ -26,15 +26,16 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { url: '/icon-48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/favicon.ico' },
-      { url: '/icon-16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-v2.ico', sizes: 'any' },
+      { url: '/icon-32-v2.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-48-v2.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icon-96-v2.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icon-192-v2.png', sizes: '192x192', type: 'image/png' },
     ],
-    shortcut: ['/icon-48.png'],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: [{ url: '/favicon-v2.ico' }],
+    apple: [{ url: '/apple-touch-icon-v2.png', sizes: '180x180', type: 'image/png' }],
   },
+
   alternates: {
     canonical: 'https://camhuuco.vn',
   },

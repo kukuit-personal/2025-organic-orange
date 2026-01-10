@@ -133,12 +133,6 @@ export default function Post0006() {
         chịu tiêu hoá.
       </p>
 
-      {/* CTA */}
-      <div className="mt-4 rounded-xl border bg-orange-50 p-4">
-        <p className="font-semibold">🍊 Cam sành hữu cơ đang thu hoạch – Xem sản phẩm</p>
-        <p className="mt-2">Bạn muốn mua cam trực tiếp từ vườn? → Liên hệ</p>
-      </div>
-
       <p className="mt-4">
         Xem thêm:{' '}
         {p2 ? (
