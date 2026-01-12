@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const ICON_ALLOWLIST = [
   '/favicon.ico',
+  '/favicon-20260112.ico',
   '/favicon-v2.ico',
   '/icon-48-v2.png',
   '/icon-192-v2.png',
