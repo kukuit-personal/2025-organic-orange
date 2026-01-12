@@ -26,9 +26,8 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { url: '/favicon-20260112.ico', sizes: 'any' }, // ưu tiên mới
-      { url: '/favicon.ico', sizes: 'any' }, // chuẩn default
-      { url: '/favicon-v2.ico', sizes: 'any' }, // fallback v2
+      { url: '/favicon-20260112.ico', sizes: 'any' },
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/icon-32-v2.png', sizes: '32x32', type: 'image/png' },
       { url: '/icon-48-v2.png', sizes: '48x48', type: 'image/png' },
       { url: '/icon-96-v2.png', sizes: '96x96', type: 'image/png' },
