@@ -17,10 +17,6 @@ const nextConfig = {
         source: '/icon-48-v2.png',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }],
       },
-      {
-        source: '/favicon-v2.ico',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }],
-      },
     ]
   },
 }
