@@ -10,19 +10,28 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Cam Hữu Cơ | Mang vitamin C đến với mọi nhà',
+  title: 'Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long - Giàu Vitamin C',
   description:
-    'Cam sành hữu cơ sạch từ vườn Vĩnh Long: không thuốc trừ sâu hóa học, thu hoạch đúng vụ, giàu vitamin C. Đặt mua cam hữu cơ, nước ép, mứt, siro – giao nhanh trong ngày.',
+    'Cam 7 Hùng - Cam sành hữu cơ sạch từ vườn Vĩnh Long: canh tác hạn chế hóa chất, thu hoạch đúng vụ, giàu vitamin C. Đặt mua cam hữu cơ, nước ép, mứt, siro – giao nhanh trong ngày.',
   keywords: [
+    // Ưu tiên đúng các keyword bạn yêu cầu
+    'cam 7 hùng',
+    'cam 7 hung',
     'cam hữu cơ',
+    'cam sanh hữu cơ',
     'cam sành hữu cơ',
-    'cam huu co',
-    'cam sanh huu co',
+    'cam vĩnh long',
+    'cam sanh vĩnh long',
+    'cam sành vĩnh long',
+
+    // bổ trợ liên quan
     'vitamin c',
     'cam sạch',
-    'nước ép cam hữu cơ',
+    'nước ép cam',
     'sản phẩm từ cam',
-    'cam Vĩnh Long',
+    'cam vườn',
+    'cam sành',
+    'đặt mua cam vĩnh long',
   ],
   icons: {
     icon: [
@@ -33,7 +42,7 @@ export const metadata: Metadata = {
       { url: '/icon-96-v2.png', sizes: '96x96', type: 'image/png' },
       { url: '/icon-192-v2.png', sizes: '192x192', type: 'image/png' },
     ],
-    shortcut: [{ url: '/favicon-20260112.ico' }], // hoặc "/favicon.ico"
+    shortcut: [{ url: '/favicon-20260112.ico' }],
     apple: [{ url: '/apple-touch-icon-v2.png', sizes: '180x180', type: 'image/png' }],
   },
   metadataBase: new URL('https://camhuuco.vn'),
@@ -41,11 +50,11 @@ export const metadata: Metadata = {
     canonical: 'https://camhuuco.vn',
   },
   openGraph: {
-    title: 'Cam Hữu Cơ | Cam sành hữu cơ sạch - giàu Vitamin C',
+    title: 'Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long - Giàu Vitamin C',
     description:
-      'Cam sành hữu cơ sạch từ vườn: không hóa chất, thu hoạch đúng vụ, giàu vitamin C. Giao nhanh trong ngày.',
+      'Cam 7 Hùng - Cam sành hữu cơ sạch từ vườn Vĩnh Long: thu hoạch đúng vụ, giàu vitamin C. Giao nhanh trong ngày.',
     url: 'https://camhuuco.vn',
-    siteName: 'Cam Hữu Cơ',
+    siteName: 'Cam 7 Hùng',
     locale: 'vi_VN',
     type: 'website',
     images: [
@@ -53,7 +62,7 @@ export const metadata: Metadata = {
         url: 'https://camhuuco.vn/images/banner-orange-1.png',
         width: 1200,
         height: 630,
-        alt: 'Cam sành hữu cơ - Cam Hữu Cơ',
+        alt: 'Cam 7 Hùng - Cam sành hữu cơ Vĩnh Long',
       },
     ],
   },
@@ -66,6 +75,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: '#f9fafb',
 }
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi" suppressHydrationWarning>
@@ -91,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="flex flex-col md:flex-row md:justify-center md:items-start gap-10 md:gap-16">
                   {/* Left */}
                   <div className="text-center md:text-left">
-                    <p className="font-semibold text-slate-800">Vườn Cam Sành Hữu Cơ</p>
+                    <p className="font-semibold text-slate-800">Vườn Cam 7 Hùng</p>
                     <p className="mt-1">Xã Hòa Bình · Tỉnh Vĩnh Long</p>
                     <p className="mt-1">Store tại TP. Hồ Chí Minh</p>
                   </div>
