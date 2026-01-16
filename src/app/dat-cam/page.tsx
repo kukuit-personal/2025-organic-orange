@@ -121,7 +121,7 @@ export default function DatCamPage() {
       </div>
 
       {/* Hero */}
-      <section className="px-4 pt-10 pb-8 md:pt-16 md:pb-12">
+      <section className="px-4 pt-10 pb-8 md:pb-12">
         <div className="mx-auto max-w-5xl">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>

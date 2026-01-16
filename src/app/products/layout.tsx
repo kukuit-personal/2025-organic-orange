@@ -1,34 +1,46 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cam Hữu Cơ | Sản phẩm cam sành hữu cơ - sạch, giàu Vitamin C',
+  title: 'Cam 7 Hùng | Sản phẩm cam sành hữu cơ Vĩnh Long - sạch, giàu Vitamin C',
   description:
-    'Danh sách sản phẩm từ cam sành hữu cơ: cam tươi, nước ép cam, mứt cam, siro cam. Cam hữu cơ sạch, giàu vitamin C, giao hàng nhanh từ vườn.',
+    'Danh sách sản phẩm từ cam sành hữu cơ Vĩnh Long của Cam 7 Hùng: cam tươi, nước ép cam, mứt cam, siro cam. Cam hữu cơ sạch, giàu vitamin C, giao hàng nhanh từ vườn.',
   keywords: [
-    'cam sành hữu cơ',
+    // Ưu tiên theo bộ keyword mới
+    'cam 7 hùng',
+    'cam 7 hung',
     'cam hữu cơ',
-    'cam sanh huu co',
-    'cam huu co',
-    'vitamin c',
+    'cam sành hữu cơ',
+    'cam sanh hữu cơ',
+    'cam vĩnh long',
+    'cam sành vĩnh long',
+    'cam sanh vĩnh long',
+
+    // theo nội dung trang products
+    'sản phẩm cam sành hữu cơ',
+    'cam tươi vĩnh long',
+    'nước ép cam',
     'nước ép cam hữu cơ',
+    'mứt cam',
     'mứt cam hữu cơ',
+    'siro cam',
     'siro cam hữu cơ',
+    'vitamin c',
   ],
   alternates: {
     canonical: 'https://camhuuco.vn/products',
   },
   openGraph: {
-    title: 'Sản phẩm cam sành hữu cơ | Cam hữu cơ sạch',
+    title: 'Sản phẩm Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long',
     description:
-      'Các sản phẩm từ cam sành hữu cơ: cam tươi, nước ép, mứt cam – giàu vitamin C, an toàn cho gia đình.',
+      'Các sản phẩm từ cam sành hữu cơ Vĩnh Long: cam tươi, nước ép, mứt cam, siro – giàu vitamin C, an toàn cho gia đình.',
     url: 'https://camhuuco.vn/products',
-    siteName: 'Cam Hữu Cơ',
+    siteName: 'Cam 7 Hùng',
     images: [
       {
         url: 'https://camhuuco.vn/images/products/orange-1.jpg',
         width: 1200,
         height: 630,
-        alt: 'Sản phẩm cam sành hữu cơ',
+        alt: 'Sản phẩm cam sành hữu cơ Vĩnh Long - Cam 7 Hùng',
       },
     ],
     locale: 'vi_VN',
