@@ -14,6 +14,7 @@ import {
   FileCheck,
   ChevronRight,
 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 const containerClass = 'max-w-6xl mx-auto px-4 md:px-6'
 
@@ -32,6 +33,61 @@ const fadeInUp: Variants = {
 const staggerParent: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+}
+function LazyGoogleMap({
+  embedSrc,
+  title = 'Bản đồ Vườn Cam 7 Hùng',
+}: {
+  embedSrc: string
+  title?: string
+}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || loaded) return
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setLoaded(true)
+          obs.disconnect()
+        }
+      },
+      { root: null, rootMargin: '200px 0px', threshold: 0.01 }
+    )
+
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [loaded])
+
+  return (
+    <div
+      ref={ref}
+      className="relative rounded-3xl overflow-hidden border border-orange-100 bg-orange-50/60 aspect-video"
+    >
+      {loaded ? (
+        <iframe
+          title={title}
+          src={embedSrc}
+          className="absolute inset-0 w-full h-full"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-6">
+            <p className="text-sm font-medium text-slate-800">Đang tải bản đồ…</p>
+            <p className="mt-1 text-xs text-slate-600">
+              Bản đồ sẽ hiển thị khi bạn kéo tới khu vực này.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function AboutOrganicOrangePage() {
@@ -501,8 +557,72 @@ export default function AboutOrganicOrangePage() {
         </div>
       </section>
 
-      {/* SECTION 6 – CTA (bg trắng) */}
+      {/* SECTION 7 – GOOGLE MAP (bg trắng hoặc cam nhạt) */}
       <section className="bg-white">
+        <div className={`${containerClass} py-12 md:py-16`}>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr,1fr] gap-8 items-center">
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="space-y-4"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Vị trí vườn cam</h2>
+              <p className="text-slate-600 leading-relaxed">
+                Bạn có thể xem vị trí vườn và bấm chỉ đường trực tiếp trên Google Maps. Nếu cần hẹn
+                tham quan hoặc lấy hàng, cứ nhắn/gọi cho chúng tôi nhé.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://share.google/lFVzm0BDKhvkeWCag"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl bg-orange-500 text-white px-4 py-2 text-sm font-medium hover:bg-orange-600 transition"
+                >
+                  Mở trên Google Maps
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-xl border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 hover:bg-orange-50 transition"
+                >
+                  Liên hệ đặt mua
+                </Link>
+              </div>
+
+              <div className="rounded-2xl border border-orange-100 bg-orange-50/40 p-4 text-sm text-slate-700">
+                <p className="font-semibold">Gợi ý</p>
+                <p className="mt-1">
+                  Khi bạn bấm “Chỉ đường”, Google Maps sẽ tự chọn tuyến đường nhanh nhất từ vị trí
+                  hiện tại.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <LazyGoogleMap
+                title="Bản đồ Vườn Cam 7 Hùng"
+                embedSrc="https://www.google.com/maps?q=V%C6%B0%E1%BB%9Dn%20Cam%207%20H%C3%B9ng&output=embed"
+              />
+              <p className="mt-2 text-xs text-slate-500">
+                *Nếu bản đồ hiển thị sai điểm, nói mình biết để mình đổi sang embed theo Place ID
+                (chuẩn tuyệt đối).
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6 – CTA (bg trắng) */}
+      <section className="bg-orange-50/15">
         <div className={`${containerClass} py-12 md:py-16 text-center`}>
           <motion.h2
             variants={fadeInUp}
