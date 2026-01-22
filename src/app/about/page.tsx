@@ -164,7 +164,7 @@ export default function AboutOrganicOrangePage() {
                 />
               </div>
               <div className="absolute -bottom-4 left-6 hidden md:block rounded-xl bg-white/85 backdrop-blur px-4 py-2 shadow-sm border border-orange-100 text-xs text-slate-700">
-                Vườn cam tại Xã Hòa Bình - Vĩnh Long - Đất, nước và giống đều được chọn lọc
+                Vườn cam tại Xã Trà Côn - Vĩnh Long - Đất, nước và giống đều được chọn lọc
               </div>
             </motion.div>
           </div>
