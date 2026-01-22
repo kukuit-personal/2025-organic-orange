@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { btnOutline, btnPrimary, ORANGE, pill, ZALO_LINK, PHONE } from './constants'
 
 export function HeroSection() {
@@ -51,8 +52,14 @@ export function HeroSection() {
 
           <div className="rounded-3xl border border-orange-100 bg-white p-4 shadow-sm">
             <div className="relative overflow-hidden rounded-3xl border border-orange-100 bg-[#FFF4EA] p-4">
-              <div className="aspect-[4/3] w-full rounded-2xl bg-white border border-orange-100 flex items-center justify-center text-slate-400">
-                Ảnh cam / ảnh đóng gói / ảnh vườn
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-white border border-orange-100">
+                <Image
+                  src="/images/dat-cam/hero.png"
+                  alt="Cam sành hữu cơ"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
 
               <div className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-orange-100 bg-white px-4 py-2 text-xs text-slate-600 shadow-sm">
@@ -63,10 +70,6 @@ export function HeroSection() {
                 Vườn cam tại Vĩnh Long • Chọn trái kỹ trước khi giao
               </div>
             </div>
-
-            <p className="mt-3 text-xs text-slate-500">
-              Tip: 1 ảnh “trái cam cận cảnh” + 1 ảnh “đóng thùng” sẽ tăng tỉ lệ chốt.
-            </p>
           </div>
         </div>
       </div>
