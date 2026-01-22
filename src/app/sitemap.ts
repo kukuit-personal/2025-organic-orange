@@ -4,6 +4,7 @@ import { POSTS } from '@/app/blog/posts'
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://camhuuco.vn'
   const now = new Date()
+  const stableDate = new Date('2026-01-22T00:00:00+07:00')
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -14,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: now,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: now,
+      lastModified: stableDate,
       changeFrequency: 'monthly',
       priority: 0.6,
     },

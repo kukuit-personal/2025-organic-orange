@@ -10,6 +10,9 @@ const OrderSchema = z.object({
   phone: z.string().trim().min(8).max(20),
   address: z.string().trim().min(1).max(200),
 
+  // NEW
+  orangeType: z.enum(['type1', 'type2']).default('type1'),
+
   packageKey: z.enum(['5kg', '10kg', '20kg', 'other']),
   otherKg: z.string().trim().max(10).optional().default(''),
 
@@ -20,8 +23,30 @@ const OrderSchema = z.object({
   hp: z.string().optional(), // honeypot
 })
 
+const PRICE_PER_KG: Record<'type1' | 'type2', number> = {
+  type1: 36000,
+  type2: 27000,
+}
+
 function normalizePhone(phone: string) {
   return phone.replace(/\s+/g, '').replace(/[^\d+]/g, '')
+}
+
+function parseKg(packageKey: string, otherKgRaw: string) {
+  if (packageKey === '5kg') return 5
+  if (packageKey === '10kg') return 10
+  if (packageKey === '20kg') return 20
+
+  // other
+  const kgStr = (otherKgRaw || '').trim()
+  if (!kgStr) throw new Error('Vui lòng nhập số kg muốn đặt.')
+  if (!/^\d+(\.\d+)?$/.test(kgStr)) throw new Error('Số kg không hợp lệ.')
+
+  const kg = Number(kgStr)
+  if (!Number.isFinite(kg) || kg <= 0) throw new Error('Số kg không hợp lệ.')
+  if (kg > 200) throw new Error('Số kg quá lớn.') // chặn cực đoan (tùy bạn)
+
+  return kg
 }
 
 export async function POST(req: Request) {
@@ -34,34 +59,25 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true }, { status: 200 })
     }
 
-    // nếu chọn other thì bắt buộc có otherKg và phải là số
-    if (parsed.packageKey === 'other') {
-      const kg = (parsed.otherKg || '').trim()
-      if (!kg) {
-        return NextResponse.json(
-          { ok: false, message: 'Vui lòng nhập số kg muốn đặt.' },
-          { status: 400 }
-        )
-      }
-      if (!/^\d+(\.\d+)?$/.test(kg)) {
-        return NextResponse.json({ ok: false, message: 'Số kg không hợp lệ.' }, { status: 400 })
-      }
-    }
+    const unitPrice = PRICE_PER_KG[parsed.orangeType]
+    const kg = parseKg(parsed.packageKey, parsed.otherKg)
+    const totalPrice = Math.round(kg * unitPrice)
 
     const db = getAdminDb()
 
-    // ✅ PATH MỚI: camhuucovn/mktonline/orders/{orderId}
-    const colRef = db
-      .collection('camhuucovn') // collection
-      .doc('mktonline') // document
-      .collection('orders') // subcollection
-
-    const docRef = colRef.doc() // {orderId} auto
+    // camhuucovn/mktonline/orders/{orderId}
+    const colRef = db.collection('camhuucovn').doc('mktonline').collection('orders')
+    const docRef = colRef.doc()
 
     await docRef.set({
       name: parsed.name,
       phone: normalizePhone(parsed.phone),
       address: parsed.address,
+
+      orangeType: parsed.orangeType,
+      unitPrice,
+      kg,
+      totalPrice,
 
       packageKey: parsed.packageKey,
       otherKg: parsed.otherKg || '',
@@ -79,15 +95,19 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, id: docRef.id }, { status: 200 })
   } catch (err: any) {
+    // lỗi validate từ zod
     if (err?.issues) {
       return NextResponse.json(
         { ok: false, message: 'Dữ liệu chưa hợp lệ.', issues: err.issues },
         { status: 400 }
       )
     }
-    return NextResponse.json(
-      { ok: false, message: err?.message || 'Server error' },
-      { status: 500 }
-    )
+
+    // lỗi “parseKg” mình throw Error(message)
+    const msg = err?.message || 'Server error'
+    const status =
+      msg.includes('kg') || msg.includes('Số kg') || msg.includes('Vui lòng') ? 400 : 500
+
+    return NextResponse.json({ ok: false, message: msg }, { status })
   }
 }

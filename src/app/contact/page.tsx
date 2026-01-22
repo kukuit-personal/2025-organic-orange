@@ -131,7 +131,7 @@ export default function ContactPage() {
             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-sm">
               <MapPin className="w-4 h-4 text-orange-600" />
             </span>
-            <span>Vườn cam: Xã Hòa Bình - Tỉnh Vĩnh Long · Store tại TP. Hồ Chí Minh</span>
+            <span>Vườn cam: Xã Trà Côn - Tỉnh Vĩnh Long · Store tại TP. Hồ Chí Minh</span>
           </motion.div>
         </div>
       </section>

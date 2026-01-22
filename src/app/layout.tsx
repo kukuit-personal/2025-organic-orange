@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   title: 'Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long - Giàu Vitamin C',
   description:
     'Cam 7 Hùng - Cam sành hữu cơ sạch từ vườn Vĩnh Long: canh tác hạn chế hóa chất, thu hoạch đúng vụ, giàu vitamin C. Đặt mua cam hữu cơ, nước ép, mứt, siro – giao nhanh trong ngày.',
+  applicationName: 'Cam 7 Hùng',
+  category: 'food',
   keywords: [
     // Ưu tiên đúng các keyword bạn yêu cầu
     'cam 7 hùng',
@@ -66,14 +68,87 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long - Giàu Vitamin C',
+    description:
+      'Cam 7 Hùng - Cam sành hữu cơ sạch từ vườn Vĩnh Long: thu hoạch đúng vụ, giàu vitamin C. Giao nhanh trong ngày.',
+    images: ['https://camhuuco.vn/images/banner-orange-1.png'],
+  },
   robots: {
     index: true,
     follow: true,
+    googleBot: { index: true, follow: true },
   },
+  // Nếu bạn verify Search Console bằng meta tag thì mở comment và dán mã vào
+  // verification: {
+  //   google: 'PASTE_YOUR_VERIFICATION_CODE_HERE',
+  // },
 }
 
 export const viewport: Viewport = {
   themeColor: '#f9fafb',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://camhuuco.vn/#org',
+      name: 'Cam 7 Hùng',
+      alternateName: ['Cam Hữu Cơ', 'camhuuco', 'Cam sành hữu cơ Vĩnh Long'],
+      url: 'https://camhuuco.vn',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://camhuuco.vn/icon-192-v2.png',
+        width: 192,
+        height: 192,
+      },
+      image: 'https://camhuuco.vn/images/banner-orange-1.png',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+84-981-353-619',
+          contactType: 'customer service',
+          areaServed: 'VN',
+          availableLanguage: ['vi'],
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+84-838-222-902',
+          contactType: 'customer service',
+          areaServed: 'VN',
+          availableLanguage: ['vi'],
+        },
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://camhuuco.vn/#website',
+      url: 'https://camhuuco.vn',
+      name: 'Cam 7 Hùng',
+      publisher: { '@id': 'https://camhuuco.vn/#org' },
+      inLanguage: 'vi-VN',
+    },
+    // Optional: LocalBusiness (giúp local SEO mạnh hơn). Nếu bạn chưa muốn thì có thể xoá block này.
+    {
+      '@type': 'LocalBusiness',
+      '@id': 'https://camhuuco.vn/#local',
+      name: 'Vườn Cam 7 Hùng',
+      url: 'https://camhuuco.vn',
+      image: 'https://camhuuco.vn/images/banner-orange-1.png',
+      telephone: '+84-981-353-619',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'VN',
+        addressRegion: 'Vĩnh Long',
+        addressLocality: 'Trà Côn',
+      },
+      areaServed: ['Vĩnh Long', 'Miền Tây', 'TP. Hồ Chí Minh', 'Khu vực gần TP. Hồ Chí Minh'],
+      parentOrganization: { '@id': 'https://camhuuco.vn/#org' },
+    },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -82,6 +157,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="color-scheme" content="light" />
         <meta name="supported-color-schemes" content="light" />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className={`${inter.className} bg-gray-50`}>
         <div className="min-h-screen flex relative">
@@ -102,7 +183,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   {/* Left */}
                   <div className="text-center md:text-left">
                     <p className="font-semibold text-slate-800">Vườn Cam 7 Hùng</p>
-                    <p className="mt-1">Xã Hòa Bình · Tỉnh Vĩnh Long</p>
+                    <p className="mt-1">Xã Trà Côn · Tỉnh Vĩnh Long</p>
                     <p className="mt-1">Store tại TP. Hồ Chí Minh</p>
                   </div>
 
