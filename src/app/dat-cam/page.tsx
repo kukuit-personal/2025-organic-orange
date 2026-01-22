@@ -1,4 +1,3 @@
-import { FloatingActions } from './_page/FloatingActions'
 import { HeroSection } from './_page/HeroSection'
 import { PricingSection } from './_page/PricingSection'
 import { TrustFaqSection } from './_page/TrustFaqSection'
