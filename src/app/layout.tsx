@@ -10,7 +10,10 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long - Giàu Vitamin C',
+  title: {
+    default: 'Cam 7 Hùng | Cam sành hữu cơ Vĩnh Long - Giàu Vitamin C',
+    template: '%s | Cam 7 Hùng',
+  },
   description:
     'Cam 7 Hùng - Cam sành hữu cơ sạch từ vườn Vĩnh Long: canh tác hạn chế hóa chất, thu hoạch đúng vụ, giàu vitamin C. Đặt mua cam hữu cơ, nước ép, mứt, siro – giao nhanh trong ngày.',
   applicationName: 'Cam 7 Hùng',
@@ -99,6 +102,12 @@ const jsonLd = {
       name: 'Cam 7 Hùng',
       alternateName: ['Cam Hữu Cơ', 'camhuuco', 'Cam sành hữu cơ Vĩnh Long'],
       url: 'https://camhuuco.vn',
+      // ✅ thêm sameAs để Google nối identity brand mạnh hơn
+      sameAs: [
+        'https://www.facebook.com/cam7hung',
+        'https://www.tiktok.com/@cam.huu.co',
+        'https://www.youtube.com/@cam7hung',
+      ],
       logo: {
         '@type': 'ImageObject',
         url: 'https://camhuuco.vn/icon-192-v2.png',
@@ -141,9 +150,10 @@ const jsonLd = {
       telephone: '+84-981-353-619',
       address: {
         '@type': 'PostalAddress',
+        streetAddress: 'Ấp Ngãi Lộ B',
         addressCountry: 'VN',
         addressRegion: 'Vĩnh Long',
-        addressLocality: 'Trà Côn',
+        addressLocality: 'Xã Trà Côn',
       },
       areaServed: ['Vĩnh Long', 'Miền Tây', 'TP. Hồ Chí Minh', 'Khu vực gần TP. Hồ Chí Minh'],
       parentOrganization: { '@id': 'https://camhuuco.vn/#org' },
@@ -190,8 +200,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   {/* Right */}
                   <div className="text-center md:text-left">
                     <p className="font-semibold text-slate-800">Hotline:</p>
-                    <p className="mt-1">0981 353 619 (Diễm)</p>
-                    <p className="mt-1">0838 222 902 (Khang)</p>
+                    <p className="mt-1">0981 353 619 (Chị Diễm)</p>
+                    <p className="mt-1">0838 222 902 (Anh Khang)</p>
                   </div>
                 </div>
               </div>
