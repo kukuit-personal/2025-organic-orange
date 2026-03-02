@@ -1,9 +1,18 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, type Variants } from 'framer-motion'
-import { ChevronRight, ShoppingCart, Leaf, Phone, MessageCircle, Facebook } from 'lucide-react'
+import {
+  ChevronRight,
+  ChevronLeft,
+  ShoppingCart,
+  Leaf,
+  Phone,
+  MessageCircle,
+  Facebook,
+} from 'lucide-react'
 
 const containerClass = 'max-w-6xl mx-auto px-4 md:px-6'
 
@@ -26,6 +35,33 @@ const staggerParent: Variants = {
 }
 
 export default function HomePage() {
+  const [bannerSlide, setBannerSlide] = useState(0)
+  const [isHovering, setIsHovering] = useState(false)
+
+  const bannerImages = [
+    '/images/home/banner-orange-1.jpg',
+    '/images/home/banner-orange-2.jpg',
+    '/images/home/banner-orange-3.jpg',
+  ]
+
+  // Auto-rotate banner every 7 seconds (pause when hovering)
+  useEffect(() => {
+    if (isHovering) return
+
+    const interval = setInterval(() => {
+      setBannerSlide((prev) => (prev + 1) % bannerImages.length)
+    }, 7000)
+    return () => clearInterval(interval)
+  }, [bannerImages.length, isHovering])
+
+  const nextBanner = () => {
+    setBannerSlide((prev) => (prev + 1) % bannerImages.length)
+  }
+
+  const prevBanner = () => {
+    setBannerSlide((prev) => (prev - 1 + bannerImages.length) % bannerImages.length)
+  }
+
   const products = [
     {
       name: 'Cam sành hữu cơ loại I',
@@ -53,7 +89,7 @@ export default function HomePage() {
       {/* SECTION 1: HERO BANNER (bg cam nhạt) */}
       <section className="bg-orange-50/70">
         <div className={`${containerClass} pt-10 pb-12`}>
-          <div className="grid grid-cols-1 md:grid-cols-[1.3fr,1fr] gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Banner image / carousel placeholder (mobile lên trước) */}
             <motion.div
               className="relative order-1 md:order-2"
@@ -63,31 +99,64 @@ export default function HomePage() {
             >
               <div
                 className="
-            relative w-full max-w-md mx-auto aspect-[3/2]
+            relative w-full aspect-[3/2]
             rounded-2xl overflow-hidden shadow-md
             ring-4 ring-orange-100/70 bg-white
           "
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
-                {/* Bạn có thể thay sau bằng carousel nếu muốn */}
-                <Image
-                  src="/images/home/banner-orange-1.jpg"
-                  alt="Giỏ cam sành hữu cơ"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 448px"
-                  priority
-                />
-              </div>
+                {/* Slider */}
+                <div className="relative w-full h-full">
+                  {bannerImages.map((image, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: idx === bannerSlide ? 1 : 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Image
+                        src={image}
+                        alt={`Giỏ cam sành hữu cơ ${idx + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 448px"
+                        priority={idx === 0}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
 
-              <div
-                className="
-            absolute -bottom-4 left-6 hidden md:inline-flex
-            items-center rounded-full bg-white/95 backdrop-blur
-            px-4 py-2 shadow-sm border border-orange-100
-            text-xs text-slate-700
-          "
-              >
-                Thu hoạch buổi sáng · Giao trong ngày (nội thành)
+                {/* Navigation Buttons (hidden) */}
+                <button
+                  onClick={prevBanner}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 opacity-0 pointer-events-none"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-5 h-5 text-slate-700" />
+                </button>
+                <button
+                  onClick={nextBanner}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 opacity-0 pointer-events-none"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-5 h-5 text-slate-700" />
+                </button>
+
+                {/* Dots Indicator */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                  {bannerImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setBannerSlide(idx)}
+                      className={`w-2.5 h-2.5 rounded-full transition-all ${
+                        idx === bannerSlide ? 'bg-orange-500' : 'bg-white/60 hover:bg-white/80'
+                      }`}
+                      aria-label={`Go to image ${idx + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
             </motion.div>
 
